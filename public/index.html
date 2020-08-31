@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>dashjs sample</h1>
+    <video id="player" controls width="500px" height="300px"></video>
+</body>
+<script src="/public/dist/bundle.js"></script>
+<script>
+    var url = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd";
+    dashplayer('player',url,false);
+</script>
+</html>
