@@ -1,12 +1,40 @@
 import {MediaPlayer} from 'dashjs';
 
-const initPlayer = (playerId,url,autoplay) => {
+const initPlayer = (playerId,controls,url,autoplay) => {
+    let qualityArray  = [];
     const player = document.getElementById(playerId);
     const dashPlayer = MediaPlayer().create();
-    setEventListeners(player,dashPlayer);
+   // setEventListeners(player,dashPlayer);
     dashPlayer.initialize(document.getElementById(playerId),url,autoplay);
-}
 
+    //get video Quality list
+    dashPlayer.on(MediaPlayer.events['STREAM_INITIALIZED'],() => {
+       qualityArray = dashPlayer.getBitrateInfoListFor("video");
+       renderQualityDropDown(qualityArray,controls,dashPlayer.getQualityFor("video"));
+    });
+    //set the quality
+    const setQulatity = ()=> {
+        let qualityIndex = document.getElementById('qualityselection').value;
+        console.log(qualityIndex);
+        dashPlayer.setQualityFor("video",qualityIndex)
+    }
+    //render the dropdown
+    const renderQualityDropDown = (qualityArray,controls,value) => {
+        let dropdown = document.createElement("select");
+        dropdown.id="qualityselection";
+        dropdown.name = "qualityselection";
+        qualityArray.map((quality,index) => {
+            console.log(quality);
+            let option = document.createElement("option");
+            option.label = quality.bitrate;
+            option.value = index;
+            dropdown.appendChild(option);
+        });
+        dropdown.value = value;
+        dropdown.addEventListener("change",setQulatity);
+        document.getElementById(controls).appendChild(dropdown);
+    }
+}
 const setEventListeners = (player,dashPlayer) => {
     console.log("setting event listeners ...");
     //dom events

@@ -8,10 +8,13 @@
 <body>
     <h1>dashjs sample</h1>
     <video id="player" controls width="500px" height="300px"></video>
+    <div id="extra-controls">
+
+    </div>
 </body>
 <script src="/public/dist/bundle.js"></script>
 <script>
     var url = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd";
-    dashplayer('player',url,false);
+    var player = dashplayer('player',"extra-controls",url,false);
 </script>
 </html>
