@@ -14,6 +14,8 @@ const initPlayer = (playerId,controls,url,autoplay) => {
     });
     //set the quality
     const setQulatity = ()=> {
+        // to override the ABR rules (ABR alg will reset the qulaity before each buffer load)
+        dashPlayer.getSettings().streaming.abr.autoSwitchBitrate = false;
         let qualityIndex = document.getElementById('qualityselection').value;
         console.log(qualityIndex);
         dashPlayer.setQualityFor("video",qualityIndex)
