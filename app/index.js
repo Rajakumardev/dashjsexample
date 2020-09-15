@@ -1,12 +1,17 @@
 import {MediaPlayer} from 'dashjs';
 
-const initPlayer = (playerId,controls,url,autoplay) => {
+const initPlayer = (playerId,controls,url,autoplay,encConf = {}) => {
+    const {config:DRMconfig,encType} = encConf;
+    
     let qualityArray  = [];
     const player = document.getElementById(playerId);
     const dashPlayer = MediaPlayer().create();
-   // setEventListeners(player,dashPlayer);
+    //setEventListeners(player,dashPlayer);
     dashPlayer.initialize(document.getElementById(playerId),url,autoplay);
-
+    if(DRMconfig){
+        console.log("enc Type:"+encType)
+        dashPlayer.setProtectionData(DRMconfig);
+    }
     //get video Quality list
     dashPlayer.on(MediaPlayer.events['STREAM_INITIALIZED'],() => {
        qualityArray = dashPlayer.getBitrateInfoListFor("video");

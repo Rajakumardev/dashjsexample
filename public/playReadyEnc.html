@@ -12,21 +12,27 @@
         <li><a href="./widevineEnc.html">Widevine DRM sample</a></li>
         <li><a href="./playReadyEnc.html">PlayReady DRM sample</a></li>
     </ul>
-    <h1>dashjs sample</h1>
+    <h1>dashjs sample - PlayReady DRM</h1>
     <video id="player" controls width="500px" height="300px"></video>
     <div id="extra-controls">
 
     </div>
+    <hr>
     <h4>works in</h4>
     <ui>
-        <li>Chrome</li>
         <li>Edge</li>
-        <li>Firefox</li>
     </ui>
 </body>
 <script src="/public/dist/bundle.js"></script>
 <script>
-    var url = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd";
-    var player = dashplayer('player',"extra-controls",url,false);
+    
+    var url = "http://profficialsite.origin.mediaservices.windows.net/c51358ea-9a5e-4322-8951-897d640fdfd7/tearsofsteel_4k.ism/manifest(format=mpd-time-csf)";
+    var player = dashplayer('player',"extra-controls",url,false,{
+        encType: 'playready',
+        config :{
+            "com.microsoft.playready": {
+                "serverURL": 'http://test.playready.microsoft.com/service/rightsmanager.asmx?cfg=(persist:false,sl:150)',
+            }} 
+    });
 </script>
 </html>

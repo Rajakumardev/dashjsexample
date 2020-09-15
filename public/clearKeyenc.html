@@ -12,7 +12,7 @@
         <li><a href="./widevineEnc.html">Widevine DRM sample</a></li>
         <li><a href="./playReadyEnc.html">PlayReady DRM sample</a></li>
     </ul>
-    <h1>dashjs sample</h1>
+    <h1>dashjs sample - clearKey DRM</h1>
     <video id="player" controls width="500px" height="300px"></video>
     <div id="extra-controls">
 
@@ -21,12 +21,20 @@
     <ui>
         <li>Chrome</li>
         <li>Edge</li>
-        <li>Firefox</li>
     </ui>
 </body>
 <script src="/public/dist/bundle.js"></script>
 <script>
-    var url = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd";
-    var player = dashplayer('player',"extra-controls",url,false);
+    
+    var url = "https://media.axprod.net/TestVectors/v7-MultiDRM-SingleKey/Manifest_ClearKey.mpd"
+    var player = dashplayer('player',"extra-controls",url,false,{
+        encType: 'clearkey',
+        config :{
+            "org.w3.clearkey": {
+            "clearkeys": {
+                "nrQFDeRLSAKTLifXUIPiZg": "FmY0xnWCPCNaSpRG-tUuTQ"
+            }
+        }} 
+    });
 </script>
 </html>
