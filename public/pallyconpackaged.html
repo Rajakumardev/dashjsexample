@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><a href="./index.html">without DRM</a></li>
+        <li><a href="./clearKeyenc.html">Clear Key DRM sample</a></li>
+        <li><a href="./widevineEnc.html">Widevine DRM sample</a></li>
+        <li><a href="./playReadyEnc.html">PlayReady DRM sample</a></li>
+        <li><a href="./multDRMPallyCon.html">Multi DRM sample</a></li>
+        <li><a href="./pallyconpackaged.html">Pallycon Packaged Multi DRM sample (Packed using Pallycon trial account)</a></li>
+    </ul>
+    <h1>dashjs sample - Pallycon Multi DRM (Packed using Pallycon trial account)</h1>
+    <p><i>packed using the CLI provided by pallycon. <a href="https://pallycon.com/docs/en/multidrm/packaging/cli-packager/">more details</a></i></p>
+    <video id="player" controls width="500px" height="300px"></video>
+    <div id="extra-controls">
+
+    </div>
+    <hr>
+    <h4>works in</h4>
+    <ui>
+        <li>Chrome</li>
+        <li>Firefox</li>
+        <li>Edge</li>
+    </ui>
+</body>
+<script src="/public/dist/bundle.js"></script>
+<script>
+    
+    var url ="./assets/stream.mpd";
+    var player = dashplayer('player',"extra-controls",url,false,{
+        encType: 'multiDRM',
+        config :{
+            "com.widevine.alpha": {
+                "serverURL": "https://license.pallycon.com/ri/licenseManager.do",
+                "httpRequestHeaders":{
+                    //generated using "https://sample.pallycon.com/dev/devconsole/customData.do?lang=en#create-custom"
+                    "pallycon-customdata-v2": "eyJkYXRhIjoibWtXK1NGMkR2Wlc4Y1BpdThKUDFOK3p0UHlkVVpYUFQ1Mm4rdmtheE95K1ZxdHZXU1wvYW9XZzRzOU1LZ2s1MTQiLCJkcm1fdHlwZSI6IldpZGV2aW5lIiwic2l0ZV9pZCI6IlNPM0EifQ=="
+                }
+            },
+            "com.microsoft.playready": {
+                "serverURL": 'https://license.pallycon.com/ri/licenseManager.do',
+                "httpRequestHeaders":{
+                //generated using "https://sample.pallycon.com/dev/devconsole/customData.do?lang=en#create-custom"
+                "pallycon-customdata-v2": "eyJkYXRhIjoibWtXK1NGMkR2Wlc4Y1BpdThKUDFOK3p0UHlkVVpYUFQ1Mm4rdmtheE95K1ZxdHZXU1wvYW9XZzRzOU1LZ2s1MTQiLCJkcm1fdHlwZSI6IlBsYXlSZWFkeSIsInNpdGVfaWQiOiJTTzNBIn0="
+            }}
+    }});
+</script>
+</html>
